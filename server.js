@@ -4,7 +4,6 @@ var logfmt = require("logfmt");
 var path    = require("path");
 var fs = require('fs');
 var multer = require('multer');
-var spawn = require("child_process").spawn;
 var bodyParser = require('body-parser')
 var app = express();
 
@@ -24,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //fileName use as argument for python
 var fileName;
 
-const multerConfig = {
+var multerConfig = {
 storage: multer.diskStorage({
  //Setup where the user's file will go
  destination: function(req, file, next){
@@ -62,6 +61,10 @@ app.get('/register', function(req, res) {
    res.sendFile(path.join(__dirname+'/form.html'));
 });
 
+app.get('/recognite', function(req, res) {
+   res.sendFile(path.join(__dirname+'/recognite.html'));
+});
+
 var upload = multer(multerConfig).single('face');
 app.post('/upload',function(req,res){
   var name;
@@ -73,7 +76,7 @@ app.post('/upload',function(req,res){
            name = req.body.userName;
            password = req.body.password;
            //python function here
-           let options = {
+           var options = {
              pythonPath: '/usr/bin/python3',
              scriptPath: path.join(__dirname+'/face-recognition-opencv'),
              args: ['--user', name, '--image', fileName]
@@ -95,6 +98,17 @@ app.post('/upload',function(req,res){
     	}
 	});
 });
+
+//recongnite event
+app.post('/recognite',function(req,res){
+         upload(req, res, function (err) {           
+          if (err) {
+               return  console.log(err);
+          } 
+        });
+        res.send('Register Complete!');
+});
+
 
 //port set up
 var port = Number(process.env.PORT || 3000);
