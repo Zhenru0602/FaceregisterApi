@@ -1,14 +1,15 @@
+var ps = require('python-shell')
 var express = require("express");
 var logfmt = require("logfmt");
 var path    = require("path");
 var fs = require('fs');
-const multer = require('multer');
-const bodyParser = require('body-parser');
+var multer = require('multer');
+var spawn = require("child_process").spawn;
+var bodyParser = require('body-parser')
 var app = express();
-app.use(bodyParser.urlencoded({extended:false})); 
-app.use(bodyParser.json());
-app.use(logfmt.requestLogger());
 
+//allow css style
+app.use(express.static(__dirname));
 //block all access to server.js file 
 app.all('/server.js', function (req,res, next) {
    res.status(403).send({
@@ -16,18 +17,18 @@ app.all('/server.js', function (req,res, next) {
    });
 });
 app.use('/server.js',express.static(path.join(__dirname, 'server.js')));
+app.use(bodyParser.urlencoded({ extended: true })); 
+//app.use(bodyParser.json());
+//app.use(logfmt.requestLogger());
 
-//allow css style
-app.use(express.static(__dirname));
-
-//MULTER CONFIG: to get file photos to temp server storage
+//fileName use as argument for python
 var fileName;
 
 const multerConfig = {
 storage: multer.diskStorage({
  //Setup where the user's file will go
  destination: function(req, file, next){
-   next(null, './imgs');
+   next(null, './face-recognition-opencv');
    },   
     
     //Then give the file a unique name
@@ -51,8 +52,6 @@ storage: multer.diskStorage({
           next(null, true);
         }else{
           console.log("file not supported");
-          
-          //TODO:  A better message response to user on failure.
           return next();
         }
     }
@@ -65,10 +64,25 @@ app.get('/register', function(req, res) {
 
 var upload = multer(multerConfig).single('face');
 app.post('/upload',function(req,res){
-	fs.readdir(path.join(__dirname+'/imgs'), function(err, items) {
+  var name;
+  var password;
+	fs.readdir(path.join(__dirname+'/face-recognition-opencv/dataset'), function(err, items) {
     	if(items.length < 10){
     		console.log("length is " + items.length + ",can add new photo");
     		 upload(req, res, function (err) {
+           name = req.body.userName;
+           password = req.body.password;
+           //python function here
+           let options = {
+             pythonPath: '/usr/local/bin/python3',
+             scriptPath: path.join(__dirname+'/face-recognition-opencv'),
+             args: ['--user', name, '--image', fileName]
+           };
+           ps.PythonShell.run('encode_faces.py', options, function (err, results) {
+              if (err) throw err;
+              // results is an array consisting of messages collected during execution
+              console.log('results: %j', results);
+           });
 			    if (err) {
 			         return  console.log(err);
 			    } 
