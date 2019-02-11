@@ -23,14 +23,17 @@ data = pickle.loads(open(args["encodings"], "rb").read())
 
 # load the input image and convert it from BGR to RGB
 image = cv2.imread(args["image"])
+max_width = 800
+if max_width < image.shape[1]:
+    scaling = max_width / float(image.shape[1])
+    image = cv2.resize(image, None, fx=scaling, fy=scaling, interpolation=cv2.INTER_CUBIC)
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # detect the (x, y)-coordinates of the bounding boxes corresponding
 # to each face in the input image, then compute the facial embeddings
 # for each face
 print("[INFO] recognizing faces...")
-boxes = face_recognition.face_locations(rgb,
-	model=args["detection_method"])
+boxes = face_recognition.face_locations(rgb,model=args["detection_method"])
 encodings = face_recognition.face_encodings(rgb, boxes)
 
 # initialize the list of names for each face detected
@@ -41,7 +44,7 @@ for encoding in encodings:
 	# attempt to match each face in the input image to our known
 	# encodings
 	matches = face_recognition.compare_faces(data["encodings"],
-		encoding)
+		encoding, tolerance=0.4)
 	name = "Unknown"
 
 	# check to see if we have found a match
@@ -75,5 +78,5 @@ for ((top, right, bottom, left), name) in zip(boxes, names):
 		0.75, (0, 255, 0), 2)
 
 # show the output image
-cv2.imshow("Image", image)
-cv2.waitKey(0)
+#cv2.imshow("Image", image)
+#cv2.waitKey(0)

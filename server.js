@@ -74,7 +74,7 @@ app.post('/upload',function(req,res){
            password = req.body.password;
            //python function here
            let options = {
-             pythonPath: '/usr/local/bin/python3',
+             pythonPath: '/usr/bin/python3',
              scriptPath: path.join(__dirname+'/face-recognition-opencv'),
              args: ['--user', name, '--image', fileName]
            };
