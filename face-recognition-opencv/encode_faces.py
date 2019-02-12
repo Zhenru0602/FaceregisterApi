@@ -62,7 +62,7 @@ for (i, imagePath) in enumerate(imagePaths):
 
 	# loop over the encodings
 	with open('face-recognition-opencv/encodings.json', mode='r+', encoding='utf-8') as feedsjson:
-		if not isEmpyty:
+		if not isEmpty:
 			feeds = json.load(feedsjson)
 		feeds = []
 		for encoding in encodings:
