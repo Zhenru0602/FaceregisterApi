@@ -6,6 +6,7 @@ from imutils import paths
 import face_recognition
 import argparse
 import json
+import io
 import cv2
 import os
 
@@ -68,7 +69,7 @@ for (i, imagePath) in enumerate(imagePaths):
 			# encodings
 			# knownEncodings.append(encoding)
 			# knownNames.append(name)
-			entry = {'name': 'name', 'encoding': 'encoding'}
+			entry = {'name': name, 'encoding': encoding}
 			feeds.append(entry)
 		json.dump(feeds, f)
 
