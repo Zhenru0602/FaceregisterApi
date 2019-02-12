@@ -33,6 +33,7 @@ imagePaths = list(paths.list_images("face-recognition-opencv/dataset/"+args["use
 if not os.path.isfile('face-recognition-opencv/encodings.json'):
 	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
 		json.dump([], f)
+		isEmpty = True
 
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
@@ -61,13 +62,16 @@ for (i, imagePath) in enumerate(imagePaths):
 
 	# loop over the encodings
 	with open('face-recognition-opencv/encodings.json', mode='r+', encoding='utf-8') as feedsjson:
-		feeds = json.load(feedsjson)
+		if not isEmpyty:
+			feeds = json.load(feedsjson)
+		feeds = []
 		for encoding in encodings:
 			# add each encoding + name to our set of known names and
 			# encodings
 			# knownEncodings.append(encoding)
 			# knownNames.append(name)
 			entry = {'name': name, 'encoding': encoding}
+			print(type(feeds))
 			feeds.append(entry)
 		json.dump(feeds, feedsjson)
 
