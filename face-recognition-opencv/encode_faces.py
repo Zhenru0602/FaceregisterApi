@@ -69,3 +69,4 @@ data = {"encodings": knownEncodings, "names": knownNames}
 f = open("face-recognition-opencv/encodings.pickle", "wb")
 f.write(pickle.dumps(data))
 f.close()
+print("[INFO] write success")
