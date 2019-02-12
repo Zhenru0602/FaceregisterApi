@@ -60,7 +60,7 @@ for (i, imagePath) in enumerate(imagePaths):
 	encodings = face_recognition.face_encodings(rgb, boxes)
 
 	# loop over the encodings
-	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as feedsjson:
+	with open('face-recognition-opencv/encodings.json', mode='r+', encoding='utf-8') as feedsjson:
 		feeds = json.load(feedsjson)
 		for encoding in encodings:
 			# add each encoding + name to our set of known names and
