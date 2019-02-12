@@ -69,7 +69,7 @@ for (i, imagePath) in enumerate(imagePaths):
 			# encodings
 			# knownEncodings.append(encoding)
 			# knownNames.append(name)
-			entry = {'name': name, 'encoding': encoding}
+			entry = {'name': name, 'encoding': encoding.tobytes()}
 			feeds.append(entry)
 		json.dump(feeds, f)
 
