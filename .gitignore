@@ -78,3 +78,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Garbage jpeg cache
+face-recognition-opencv/*.jpeg
