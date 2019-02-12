@@ -1,20 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-body, html {
-    height: 100%;
+html, body{
+    height: 10%;
     background-image: url("background.jpeg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-color: #222222;
-    
+    /*background-repeat: no-repeat;*/
 }
 
 .login-page {
   width: 100%;
   height: 100%;
-  padding: 10% 0 0;
+  padding: 5% 0 0;
   margin: 5 5 5 5;
-  background-color: rgba(106, 162, 252, 0.35);
+  /*background-color: rgba(106, 162, 252, 0.35);*/
 }
 .logo {
   margin: auto; 
