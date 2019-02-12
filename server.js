@@ -62,7 +62,7 @@ app.get('/register', function(req, res) {
 });
 
 app.get('/recognize', function(req, res) {
-   res.sendFile(path.join(__dirname+'/recognite.html'));
+   res.sendFile(path.join(__dirname+'/recognize.html'));
 });
 
 var upload = multer(multerConfig).single('face');
@@ -77,7 +77,7 @@ app.post('/upload',function(req,res){
            password = req.body.password;
            //python function here
            var options = {
-             pythonPath: '/usr/local/bin/python3',
+             pythonPath: '/usr/bin/python3',
              scriptPath: path.join(__dirname+'/face-recognition-opencv'),
              args: ['--user', name, '--image', fileName]
            };
@@ -103,7 +103,7 @@ app.post('/upload',function(req,res){
 app.post('/recognize',function(req,res){
          upload(req, res, function (err) {  
           var options = {
-             pythonPath: '/usr/local/bin/python3',
+             pythonPath: '/usr/bin/python3',
              scriptPath: path.join(__dirname+'/face-recognition-opencv'),
              args: ['--image', fileName]
            };  
