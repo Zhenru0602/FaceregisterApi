@@ -28,12 +28,12 @@ print("[INFO] quantifying faces...")
 imagePaths = list(paths.list_images("face-recognition-opencv/dataset/"+args["user"]))
 
 # initialize the list of known encodings and known names
-# data = json.load(open("face-recognition-opencv/encodings.json", "rb").read())
-# knownEncodings = data["encodings"]
-# knownNames = data["names"]
-if not os.path.isfile('face-recognition-opencv/encodings.json'):
-	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
-		json.dump([], f)
+data = json.load(open("face-recognition-opencv/encodings.pickle", "rb").read())
+knownEncodings = data["encodings"]
+knownNames = data["names"]
+# if not os.path.isfile('face-recognition-opencv/encodings.json'):
+# 	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
+# 		json.dump([], f)
 
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
@@ -61,22 +61,22 @@ for (i, imagePath) in enumerate(imagePaths):
 	encodings = face_recognition.face_encodings(rgb, boxes)
 
 	# loop over the encodings
-	with open('face-recognition-opencv/encodings.json') as f:
-		feeds = json.load(f)
-	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
-		for encoding in encodings:
+# 	with open('face-recognition-opencv/encodings.json') as f:
+# 		feeds = json.load(f)
+# 	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
+	for encoding in encodings:
 			# add each encoding + name to our set of known names and
 			# encodings
-			# knownEncodings.append(encoding)
-			# knownNames.append(name)
-			entry = {'name': name, 'encoding': encoding.tolist()}
-			feeds.append(entry)
-		json.dump(feeds, f)
+		knownEncodings.append(encoding)
+		knownNames.append(name)
+# 			entry = {'name': name, 'encoding': encoding.tolist()}
+# 			feeds.append(entry)
+# 		json.dump(feeds, f)
 
 # dump the facial encodings + names to disk
-# print("[INFO] serializing encodings...")
-# data = {"encodings": knownEncodings, "names": knownNames}
-# f = open("face-recognition-opencv/encodings.pickle", "wb")
-# f.write(pickle.dumps(data))
-# f.close()
+print("[INFO] serializing encodings...")
+data = {"encodings": knownEncodings, "names": knownNames}
+f = open("face-recognition-opencv/encodings.pickle", "wb")
+f.write(pickle.dumps(data))
+f.close()
 print("[INFO] write success")
