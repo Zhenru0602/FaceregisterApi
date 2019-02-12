@@ -68,9 +68,9 @@ for (i, imagePath) in enumerate(imagePaths):
 			# encodings
 			# knownEncodings.append(encoding)
 			# knownNames.append(name)
-			entry = {'name': name, 'encoding': encoding}
+			entry = {'name': 'name', 'encoding': 'encoding'}
 			feeds.append(entry)
-		json.dumps(feeds, f)
+		json.dump(feeds, f)
 
 # dump the facial encodings + names to disk
 # print("[INFO] serializing encodings...")
