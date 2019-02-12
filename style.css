@@ -14,7 +14,7 @@ body, html {
   height: 100%;
   padding: 10% 0 0;
   margin: 5 5 5 5;
-  background-color: rgba(106, 162, 252, 0.5);
+  background-color: rgba(106, 162, 252, 0.35);
 }
 .logo {
   margin: auto; 
