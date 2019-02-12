@@ -2,9 +2,11 @@
 
 html, body{
     height: 10%;
-    background-image: url("background.jpeg");
+    background-image: url("background.jpeg"), linear-gradient(#4a5c94, #09130D 1080px);
+    background-attachment: fixed;
+    background-position: center bottom;
+    background-repeat: no-repeat;
     background-size: cover;
-    /*background-repeat: no-repeat;*/
 }
 
 .login-page {
