@@ -32,7 +32,7 @@ imagePaths = list(paths.list_images("face-recognition-opencv/dataset/"+args["use
 # knownNames = data["names"]
 if not os.path.isfile('face-recognition-opencv/encodings.json'):
 	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
-		json.dumps([], f)
+		json.dump([], f)
 
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
@@ -60,17 +60,17 @@ for (i, imagePath) in enumerate(imagePaths):
 	encodings = face_recognition.face_encodings(rgb, boxes)
 
 	# loop over the encodings
-	with open('face-recognition-opencv/encodings.json', mode='r+', encoding='utf-8') as feedsjson:
-		feeds = json.loads(feedsjson.read())
+	with open('face-recognition-opencv/encodings.json') as f:
+		feeds = json.load(f)
+	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
 		for encoding in encodings:
 			# add each encoding + name to our set of known names and
 			# encodings
 			# knownEncodings.append(encoding)
 			# knownNames.append(name)
 			entry = {'name': name, 'encoding': encoding}
-			print(type(feeds))
 			feeds.append(entry)
-		json.dumps(feeds, feedsjson)
+		json.dumps(feeds, f)
 
 # dump the facial encodings + names to disk
 # print("[INFO] serializing encodings...")
