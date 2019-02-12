@@ -5,6 +5,7 @@ var path    = require("path");
 var fs = require('fs');
 var multer = require('multer');
 var bodyParser = require('body-parser')
+var uuid = require('uuid/v1');
 var app = express();
 
 //allow css style
@@ -34,7 +35,7 @@ storage: multer.diskStorage({
     filename: function(req, file, next){
         console.log(file);
         const ext = file.mimetype.split('/')[1];
-        fileName = file.fieldname + '-' + Date.now() + '.'+ ext
+        fileName = file.fieldname + '-' + uuid() + '.'+ ext
         next(null, fileName);
       }
     }),   
