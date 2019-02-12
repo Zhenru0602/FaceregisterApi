@@ -66,12 +66,12 @@ app.get('/recognize', function(req, res) {
    res.sendFile(path.join(__dirname+'/recognize.html'));
 });
 
-var upload = multer(multerConfig).single('face');
 app.post('/upload',function(req,res){
   var name;
   var password;
 	fs.readdir(path.join(__dirname+'/face-recognition-opencv/dataset'), function(err, items) {
     	if(items.length < 10){
+        var upload = multer(multerConfig).single('face');
     		console.log("length is " + items.length + ",can add new photo");
     		 upload(req, res, function (err) {
            name = req.body.userName;
@@ -102,6 +102,7 @@ app.post('/upload',function(req,res){
 
 //recongnite event
 app.post('/recognize',function(req,res){
+         var upload = multer(multerConfig).single('face');
          upload(req, res, function (err) {  
           var options = {
              pythonPath: '/usr/bin/python3',
