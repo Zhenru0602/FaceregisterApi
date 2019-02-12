@@ -5,8 +5,9 @@
 from imutils import paths
 import face_recognition
 import argparse
-import json
-import io
+#import json
+#import io
+import pickle
 import cv2
 import os
 
@@ -28,7 +29,7 @@ print("[INFO] quantifying faces...")
 imagePaths = list(paths.list_images("face-recognition-opencv/dataset/"+args["user"]))
 
 # initialize the list of known encodings and known names
-data = json.load(open("face-recognition-opencv/encodings.pickle", "rb").read())
+data = pickle.loads(open("face-recognition-opencv/encodings.pickle", "rb").read())
 knownEncodings = data["encodings"]
 knownNames = data["names"]
 # if not os.path.isfile('face-recognition-opencv/encodings.json'):
