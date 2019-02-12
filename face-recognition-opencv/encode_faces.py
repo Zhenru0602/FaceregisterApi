@@ -5,8 +5,6 @@
 from imutils import paths
 import face_recognition
 import argparse
-#import json
-#import io
 import pickle
 import cv2
 import os
@@ -32,9 +30,6 @@ imagePaths = list(paths.list_images("face-recognition-opencv/dataset/"+args["use
 data = pickle.loads(open("face-recognition-opencv/encodings.pickle", "rb").read())
 knownEncodings = data["encodings"]
 knownNames = data["names"]
-# if not os.path.isfile('face-recognition-opencv/encodings.json'):
-# 	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
-# 		json.dump([], f)
 
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
@@ -62,17 +57,11 @@ for (i, imagePath) in enumerate(imagePaths):
 	encodings = face_recognition.face_encodings(rgb, boxes)
 
 	# loop over the encodings
-# 	with open('face-recognition-opencv/encodings.json') as f:
-# 		feeds = json.load(f)
-# 	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
 	for encoding in encodings:
-			# add each encoding + name to our set of known names and
-			# encodings
+		# add each encoding + name to our set of known names and
+		# encodings
 		knownEncodings.append(encoding)
 		knownNames.append(name)
-# 			entry = {'name': name, 'encoding': encoding.tolist()}
-# 			feeds.append(entry)
-# 		json.dump(feeds, f)
 
 # dump the facial encodings + names to disk
 print("[INFO] serializing encodings...")
