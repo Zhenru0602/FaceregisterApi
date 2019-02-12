@@ -32,7 +32,7 @@ imagePaths = list(paths.list_images("face-recognition-opencv/dataset/"+args["use
 # knownNames = data["names"]
 if not os.path.isfile('face-recognition-opencv/encodings.json'):
 	with open('face-recognition-opencv/encodings.json', mode='w', encoding='utf-8') as f:
-    json.dump([], f)
+		json.dump([], f)
 
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
