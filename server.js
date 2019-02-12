@@ -61,7 +61,7 @@ app.get('/register', function(req, res) {
    res.sendFile(path.join(__dirname+'/form.html'));
 });
 
-app.get('/recognite', function(req, res) {
+app.get('/recognize', function(req, res) {
    res.sendFile(path.join(__dirname+'/recognite.html'));
 });
 
@@ -77,7 +77,7 @@ app.post('/upload',function(req,res){
            password = req.body.password;
            //python function here
            var options = {
-             pythonPath: '/usr/bin/python3',
+             pythonPath: '/usr/local/bin/python3',
              scriptPath: path.join(__dirname+'/face-recognition-opencv'),
              args: ['--user', name, '--image', fileName]
            };
@@ -100,13 +100,23 @@ app.post('/upload',function(req,res){
 });
 
 //recongnite event
-app.post('/recognite',function(req,res){
-         upload(req, res, function (err) {           
+app.post('/recognize',function(req,res){
+         upload(req, res, function (err) {  
+          var options = {
+             pythonPath: '/usr/local/bin/python3',
+             scriptPath: path.join(__dirname+'/face-recognition-opencv'),
+             args: ['--image', fileName]
+           };  
+           ps.PythonShell.run('recognize_faces_image.py', options, function (err, results) {
+              if (err) throw err;
+              // results is an array consisting of messages collected during execution
+              console.log(results);
+              res.send(results);
+           });       
           if (err) {
                return  console.log(err);
           } 
         });
-        res.send('Register Complete!');
 });
 
 

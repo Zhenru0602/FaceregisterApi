@@ -6,11 +6,10 @@ import face_recognition
 import argparse
 import pickle
 import cv2
+import os
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-e", "--encodings", required=True,
-	help="path to serialized db of facial encodings")
 ap.add_argument("-i", "--image", required=True,
 	help="path to input image")
 ap.add_argument("-d", "--detection-method", type=str, default="cnn",
@@ -19,10 +18,10 @@ args = vars(ap.parse_args())
 
 # load the known faces and embeddings
 # print("[INFO] loading encodings...")
-data = pickle.loads(open(args["encodings"], "rb").read())
+data = pickle.loads(open("face-recognition-opencv/encodings.pickle", "rb").read())
 
 # load the input image and convert it from BGR to RGB
-image = cv2.imread(args["image"])
+image = cv2.imread("face-recognition-opencv/"+args["image"])
 max_width = 800
 if max_width < image.shape[1]:
     scaling = max_width / float(image.shape[1])
@@ -43,8 +42,7 @@ names = []
 for encoding in encodings:
 	# attempt to match each face in the input image to our known
 	# encodings
-	matches = face_recognition.compare_faces(data["encodings"],
-		encoding, tolerance=0.4)
+	matches = face_recognition.compare_faces(data["encodings"],encoding)
 	name = "Unknown"
 
 	# check to see if we have found a match
@@ -70,6 +68,7 @@ for encoding in encodings:
 	names.append(name)
 
 print(names)
+os.remove("face-recognition-opencv/"+args["image"])
 # loop over the recognized faces
 # for ((top, right, bottom, left), name) in zip(boxes, names):
 # 	# draw the predicted face name on the image
