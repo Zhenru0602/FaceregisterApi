@@ -42,7 +42,7 @@ names = []
 for encoding in encodings:
 	# attempt to match each face in the input image to our known
 	# encodings
-	matches = face_recognition.compare_faces(data["encodings"],encoding)
+	matches = face_recognition.compare_faces(data["encodings"],encoding, threshold=0.4)
 	name = "Unknown"
 
 	# check to see if we have found a match
