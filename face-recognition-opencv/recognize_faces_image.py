@@ -67,7 +67,7 @@ for encoding in encodings:
 	# update the list of names
 	names.append(name)
 
-print(names)
+print(names[0][0])
 os.remove("face-recognition-opencv/"+args["image"])
 # loop over the recognized faces
 # for ((top, right, bottom, left), name) in zip(boxes, names):
