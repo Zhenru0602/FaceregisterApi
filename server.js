@@ -79,7 +79,7 @@ app.post('/upload',function(req,res){
            		//password check
            		if (password != "midea") {
            			console.log("wrong password");
-           			return res.status(404).json("Access Denied: Invalid Credentials");
+           			res.send("Access Denied: Invalid Credentials");
            		}
 
            		else {//python function here
@@ -93,12 +93,12 @@ app.post('/upload',function(req,res){
     	          		// results is an array consisting of messages collected during execution
               			console.log('results: %j', results);
            			});
+           		res.send('Register Complete!');
            		}
 				if (err) {
 	        		return  console.log(err);
 				} 
 			});
-    		res.send('Register Complete!');
     	}
     	
     	else{
