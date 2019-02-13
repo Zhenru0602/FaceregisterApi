@@ -8,4 +8,11 @@ data = {"encodings": [], "names": []}
 f = open("encodings.pickle", "wb")
 f.write(pickle.dumps(data))
 f.close()
+
+
+os.rmdir('dataset/')
+os.mkdir('dataset/')
+
+
+
 print("[INFO] cleaning done! Hooray!")

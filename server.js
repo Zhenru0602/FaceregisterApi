@@ -85,7 +85,7 @@ app.post('/upload',function(req,res){
            			res.send("Access Denied: Invalid Credentials");
            			fs.unlink(__dirname+'/face-recognition-opencv/'+fileName, (err) => {
   						if (err) {
-    						return  console.error(err)
+    						    console.error(err)
   						}
            			})
 				}
@@ -103,7 +103,7 @@ app.post('/upload',function(req,res){
            		res.send('Register Complete!');
            		}
 				if (err) {
-	        		return  console.log(err);
+	        		    console.log(err);
 				} 
 			});
     	}
@@ -131,7 +131,7 @@ app.post('/recognize',function(req,res){
         	res.send(results);
     	});       
         if (err) {
-        	return  console.log(err);
+            console.log(err);
         } 
     });
 });
