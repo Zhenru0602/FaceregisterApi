@@ -16,7 +16,7 @@ For register: serverIP:3000/register
 For recognize: serverIP:3000/recognize
 
 Password:
-default is not require, you can add password by editing the server.js file
+default is midea, you can add password by editing the server.js file
 
 Helpful Link:
 How to config opencv and python enviroment: https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/
