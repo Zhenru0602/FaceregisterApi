@@ -81,9 +81,12 @@ app.post('/upload',function(req,res){
            		if (password != PWD) {
            			console.log("wrong password");
            			res.send("Access Denied: Invalid Credentials");
-           			fs.unlink('/face-recognition-opencv/'+fileName);
-           		}
-
+           			fs.unlink('/face-recognition-opencv/'+fileName, (err) => {
+  						if (err) {
+    						return  console.error(err)
+  						}
+           			})
+				}
            		else {//python function here
            			var options = {
             			pythonPath: '/usr/bin/python3',
