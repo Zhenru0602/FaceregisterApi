@@ -78,8 +78,8 @@ app.post('/upload',function(req,res){
            		password = req.body.password;
            		//password check
            		if (password != "midea") {
-           			console.log("wrong password")
-           			res.send("Access Denied: Invalid Credential")
+           			console.log("wrong password");
+           			res.send("Access Denied: Invalid Credential");
            		}
 
            		else {//python function here
