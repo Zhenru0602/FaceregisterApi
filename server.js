@@ -11,7 +11,7 @@ var app = express();
 //allow css style
 app.use(express.static(__dirname));
 //block all access to server.js file 
-app.all('/server.js', function (req,res, next) {
+app.all(['/server.js', '/face-recognition-opencv/*'], function (req,res, next) {
    res.status(403).send({
       message: 'Access Forbidden'
    });
