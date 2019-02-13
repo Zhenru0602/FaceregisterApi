@@ -69,6 +69,7 @@ app.get('/recognize', function(req, res) {
 app.post('/upload',function(req,res){
   var name;
   var password;
+  const PWD = "midea"
 	fs.readdir(path.join(__dirname+'/face-recognition-opencv/dataset'), function(err, items) {
     	if(items.length < 10){
         	var upload = multer(multerConfig).single('face');
@@ -77,9 +78,10 @@ app.post('/upload',function(req,res){
            		name = req.body.userName;
            		password = req.body.password;
            		//password check
-           		if (password != "midea") {
+           		if (password != PWD) {
            			console.log("wrong password");
            			res.send("Access Denied: Invalid Credentials");
+           			fs.unlink('/face-recognition-opencv/'+fileName);
            		}
 
            		else {//python function here
