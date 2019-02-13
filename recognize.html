@@ -14,31 +14,36 @@
         <h2 align="center">Midea Face ID Recognite</h2>
       </div>
       <div class="form">
-        <form class="login-form" onsubmit="changeDiv()" action="/recognize" method="post" enctype="multipart/form-data" >
-          <input type="file" name="face" accept="image/*" capture="camera">
-          <button>Start</button>
-        </form>
+        <form class="login-form" action="/recognize" method="post" enctype="multipart/form-data" > 
+          <input type="file" name="face" accept="image/*" capture="camera"> 
+          <button onclick="changeDiv()">Start</button>
+         </form> 
       </div>
       <div class="loading">
-      这是第二个Div
+        <img src="https://gifimage.net/wp-content/uploads/2017/11/gif-transparent-6.gif" style="width: 200px; height: 300px; display: block; margin-left: auto; margin-right: auto;">
+        <h1 align="center" style="color: white;">Loading...</h1>
       </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  
+
+    <script type="text/javascript">
+      function changeDiv(){
+        $( ".form" ).css( "display", "none" );
+        $( ".loading" ).css( "display", "block" );
+      }
+  	</script>
+
   </body>  
 
-  <script src="https://ajax.googleapis.com/ajax/libs/
-  jquery/1.11.1/jquery.min.js"></script>
   
   <script type="text/javascript">
     $('.message a').click(function(){
      $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     });
   </script>
-
-  <script type="text/javascript">
-      function changeDiv(){
-        $( ".form" ).css( "display", "none" );
-        $( ".loading" ).css( "display", "block" );
-      }
-  </script>
+ 
+  
 
 </html>
