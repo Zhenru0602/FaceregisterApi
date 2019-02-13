@@ -14,9 +14,9 @@
         <h2 align="center">Midea Face ID Recognite</h2>
       </div>
       <div class="form">
-        <form class="login-form" action="/recognize" method="post" enctype="multipart/form-data" >
+        <form class="login-form" onsubmit="changeDiv()" action="/recognize" method="post" enctype="multipart/form-data" >
           <input type="file" name="face" accept="image/*" capture="camera">
-          <button onclick="changeDiv()">Start</button>
+          <button>Start</button>
         </form>
       </div>
       <div class="loading">
