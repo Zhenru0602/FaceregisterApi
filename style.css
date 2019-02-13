@@ -16,6 +16,10 @@ html, body{
   margin: 5 5 5 5;
   /*background-color: rgba(106, 162, 252, 0.35);*/
 }
+.loading {
+  display: none;
+  margin: auto;
+}
 .logo {
   margin: auto; 
   color: white; 
