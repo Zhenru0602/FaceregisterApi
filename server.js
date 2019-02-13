@@ -71,28 +71,36 @@ app.post('/upload',function(req,res){
   var password;
 	fs.readdir(path.join(__dirname+'/face-recognition-opencv/dataset'), function(err, items) {
     	if(items.length < 10){
-        var upload = multer(multerConfig).single('face');
+        	var upload = multer(multerConfig).single('face');
     		console.log("length is " + items.length + ",can add new photo");
-    		 upload(req, res, function (err) {
-           name = req.body.userName;
-           password = req.body.password;
-           //python function here
-           var options = {
-             pythonPath: '/usr/bin/python3',
-             scriptPath: path.join(__dirname+'/face-recognition-opencv'),
-             args: ['--user', name, '--image', fileName]
-           };
-           ps.PythonShell.run('encode_faces.py', options, function (err, results) {
-              if (err) throw err;
-              // results is an array consisting of messages collected during execution
-              console.log('results: %j', results);
-           });
-			    if (err) {
-			         return  console.log(err);
-			    } 
-			  });
+    		upload(req, res, function (err) {
+           		name = req.body.userName;
+           		password = req.body.password;
+           		//password check
+           		if (password != "midea") {
+           			console.log("wrong password")
+           			res.send("Access Denied: Invalid Credential")
+           		}
+
+           		else {//python function here
+           			var options = {
+            			pythonPath: '/usr/bin/python3',
+             			scriptPath: path.join(__dirname+'/face-recognition-opencv'),
+             			args: ['--user', name, '--image', fileName]
+           			};
+           			ps.PythonShell.run('encode_faces.py', options, function (err, results) {
+	            		if (err) throw err;
+    	          		// results is an array consisting of messages collected during execution
+              			console.log('results: %j', results);
+           			});
+           		}
+				if (err) {
+	        		return  console.log(err);
+				} 
+			});
     		res.send('Register Complete!');
     	}
+    	
     	else{
     		console.log("length is " + items.length + ",cannot add new photo");
     		res.send('Database was full! Cannot register!');
@@ -102,28 +110,28 @@ app.post('/upload',function(req,res){
 
 //recongnite event
 app.post('/recognize',function(req,res){
-         var upload = multer(multerConfig).single('face');
-         upload(req, res, function (err) {  
-          var options = {
-             pythonPath: '/usr/bin/python3',
-             scriptPath: path.join(__dirname+'/face-recognition-opencv'),
-             args: ['--image', fileName]
-           };  
-           ps.PythonShell.run('recognize_faces_image.py', options, function (err, results) {
-              if (err) throw err;
-              // results is an array consisting of messages collected during execution
-              console.log(results);
-              res.send(results);
-           });       
-          if (err) {
-               return  console.log(err);
-          } 
-        });
+	var upload = multer(multerConfig).single('face');
+    upload(req, res, function (err) {  
+    	var options = {
+        	pythonPath: '/usr/bin/python3',
+        	scriptPath: path.join(__dirname+'/face-recognition-opencv'),
+        	args: ['--image', fileName]
+    	};  
+    	ps.PythonShell.run('recognize_faces_image.py', options, function (err, results) {
+        	if (err) throw err;
+        	// results is an array consisting of messages collected during execution
+        	console.log(results);
+        	res.send(results);
+    	});       
+        if (err) {
+        	return  console.log(err);
+        } 
+    });
 });
 
 
 //port set up
 var port = Number(process.env.PORT || 3000);
 app.listen(port, function() {
-  console.log("Listening on " + port);
+	console.log("Listening on " + port);
 });
