@@ -8,21 +8,15 @@ var bodyParser = require('body-parser')
 var uuid = require('uuid/v1');
 var app = express();
 
-//block all access to server.js file 
-app.all('/server.js', function (req,res, next) {
+//block all access to server.js and source files 
+app.all(['/server.js', '/face-recognition-opencv/*'], function (req,res, next) {
    res.status(403).send({
       message: 'Access Forbidden'
    });
 });
 app.use('/server.js',express.static(path.join(__dirname, 'server.js')));
-
-//block access to source folder
-app.all('/face-recognition-opencv/*', function (req,res, next) {
-   res.status(403).send({
-      message: 'Access Forbidden'
-   });
-});
 app.use('/face-recognition-opencv',express.static(path.join(__dirname, 'face-recognition-opencv')));
+
 
 //use body parser
 app.use(bodyParser.urlencoded({ extended: true })); 
