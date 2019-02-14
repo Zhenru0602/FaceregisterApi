@@ -81,3 +81,6 @@ typings/
 
 # Garbage jpeg cache
 face-recognition-opencv/*.jpeg
+
+# User data
+face-recognition-opencv/dataset/*
