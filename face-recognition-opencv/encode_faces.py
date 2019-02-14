@@ -23,7 +23,7 @@ args = vars(ap.parse_args())
 try:
 	filedir = "face-recognition-opencv/dataset/" + args["user"]
 	tempfile = "face-recognition-opencv/"+args["image"]
-	if os.path.ispath(filedir):
+	if os.path.isdir(filedir):
 		raise PermissionError
 	if not os.path.isfile(tempfile):
 		raise FileNotFoundError()
