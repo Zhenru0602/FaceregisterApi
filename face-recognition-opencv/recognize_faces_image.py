@@ -69,7 +69,6 @@ try:
 		names.append(name)
 
 	print(names[0])
-	os.remove("face-recognition-opencv/"+args["image"])
 	# loop over the recognized faces
 	# for ((top, right, bottom, left), name) in zip(boxes, names):
 	# 	# draw the predicted face name on the image
@@ -83,3 +82,6 @@ try:
 	#cv2.waitKey(0)
 except:
 	print("Unknown")
+	
+finally:
+	os.remove("face-recognition-opencv/"+args["image"])
