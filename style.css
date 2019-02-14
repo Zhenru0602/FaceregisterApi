@@ -23,9 +23,11 @@ html, body{
     font-size: 11px;
 }
 .logo {
-  margin: auto; 
   color: white; 
   padding: 10px;
+  font-family: "Century", sans-serif;
+  font-size: 19px;
+  font-weight: normal;
 }
 .form {
   position: relative;
