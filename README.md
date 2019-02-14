@@ -11,6 +11,8 @@ How to use:
 6. Install all Nodejs packages by running $npm install$ on server
 7. Run $node server.js$ on server to start the website (you can use npm package pm2 to run your server in background forever)
 
+*. To clean the data in database, run clean_faces.py with python3 in folder face-recognition-opencv/. 
+
 URL:
 For register: serverIP:3000/register
 For recognize: serverIP:3000/recognize
