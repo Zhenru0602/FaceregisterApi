@@ -93,6 +93,3 @@ except PermissionError:
 	print("[ERROR] user already exists, only one scan permitted")
 	os.remove(tempfile)
 	
-except:
-	print("[ERROR] unkown error")
-	
