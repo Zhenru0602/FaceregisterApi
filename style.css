@@ -24,8 +24,8 @@ html, body{
     font-size: 11px;
 }
 .logo {
-  /*color: #019FE3;*/ 
-    color: #FFFFFF;
+  color: #019FE3; 
+ /*   color: #FFFFFF */;
   padding: 10px;
   font-family: "Calibri", sans-serif;
   font-size: 19px;
