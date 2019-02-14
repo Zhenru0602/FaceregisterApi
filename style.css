@@ -117,6 +117,7 @@ body {
   background: -o-linear-gradient(right, #000000, #8DC26F);
   background: linear-gradient(to left, #000000, #8DC26F);*/
   font-family: "Roboto", sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
