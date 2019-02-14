@@ -23,9 +23,11 @@ args = vars(ap.parse_args())
 try:
 	filedir = "face-recognition-opencv/dataset/" + args["user"]
 	tempfile = "face-recognition-opencv/"+args["image"]
-	os.makedirs(filedir)
+	if os.path.ispath(filedir):
+		raise PermissionError
 	if not os.path.isfile(tempfile):
 		raise FileNotFoundError()
+	os.makedirs(filedir)
 	os.rename(tempfile, filedir + "/" + args["image"])
 
 	# grab the paths to the input images in our dataset
@@ -80,13 +82,17 @@ try:
 
 except FileNotFoundError:
 	print("[ERROR] no file uploaded")
-	if os.path.isdir(filedir):
-		shutil.rmtree(filedir)
+
 except ValueError:
 	print("[ERROR] no face detected")
 	if os.path.isdir(filedir):
 		shutil.rmtree(filedir)
 	print("[INFO] removing invalid entries")
+	
+except PermissionError:
+	print("[ERROR] user already exists, only one scan permitted")
+	os.remove(tempfile)
+	
 except:
 	print("[ERROR] unkown error")
 	
