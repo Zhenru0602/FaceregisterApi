@@ -22,8 +22,11 @@ args = vars(ap.parse_args())
 
 try:
 	filedir = "face-recognition-opencv/dataset/" + args["user"]
+	tempfile = "face-recognition-opencv/"+args["image"]
 	os.makedirs(filedir)
-	os.rename("face-recognition-opencv/"+args["image"], filedir + "/" + args["image"])
+	if not os.path.isfile(tempfile):
+		raise FileNotFoundError()
+	os.rename(tempfile, filedir + "/" + args["image"])
 
 	# grab the paths to the input images in our dataset
 	print("[INFO] quantifying faces...")
@@ -75,8 +78,12 @@ try:
 	f.close()
 	print("[INFO] write success")
 
+except FileNotFoundError:
+	print("[ERROR] no file uploaded")
+	if os.path.isdir(filedir):
+		shutil.rmtree(filedir)
 except ValueError:
-	print("[ERROR] face not detected")
+	print("[ERROR] no face detected")
 	if os.path.isdir(filedir):
 		shutil.rmtree(filedir)
 	print("[INFO] removing invalid entries")
