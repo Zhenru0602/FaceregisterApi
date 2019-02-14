@@ -84,4 +84,6 @@ except:
 	print("Unknown")
 	
 finally:
-	os.remove("face-recognition-opencv/"+args["image"])
+        filename = "face-recognition-opencv/"+args["image"]
+        if os.path.isfile(filename):
+	        os.remove(filename)
