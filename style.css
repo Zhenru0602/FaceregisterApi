@@ -2,7 +2,7 @@
 
 html, body{
     height: 100%;
-    background-image: url("background.jpeg");
+    background-image: url("background.gif");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -23,7 +23,7 @@ html, body{
     font-size: 11px;
 }
 .logo {
-  color: white; 
+  color: #019FE3; 
   padding: 10px;
   font-family: "Century", sans-serif;
   font-size: 19px;
