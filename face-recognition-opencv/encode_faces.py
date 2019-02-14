@@ -54,7 +54,9 @@ try:
 		# detect the (x, y)-coordinates of the bounding boxes
 		# corresponding to each face in the input image
 		boxes = face_recognition.face_locations(rgb,model=args["detection_method"])
-		print("++++++++++++++", boxes)
+		if len(boxes) == 0:
+			raise ValueError()
+			
 		# compute the facial embedding for the face
 		encodings = face_recognition.face_encodings(rgb, boxes)
 
@@ -73,9 +75,11 @@ try:
 	f.close()
 	print("[INFO] write success")
 
-except:
-	print("[INFO] Error!")
+except ValueError:
+	print("[ERROR] face not detected")
 	if os.path.isdir(filedir):
 		shutil.rmtree(filedir)
 	print("[INFO] removing invalid entries")
+except:
+	print("[ERROR] unkown error")
 	
