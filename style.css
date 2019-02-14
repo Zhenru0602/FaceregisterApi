@@ -2,7 +2,8 @@
 
 html, body{
     height: 100%;
-    background-image: url("background.gif");
+    /*background-image: url("background.gif");*/
+    background-image: url("background.jpeg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -23,7 +24,7 @@ html, body{
     font-size: 11px;
 }
 .logo {
-  color: #019FE3; 
+  /*color: #019FE3;*/ 
   padding: 10px;
   font-family: "Calibri", sans-serif;
   font-size: 19px;
