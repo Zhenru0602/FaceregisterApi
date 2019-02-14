@@ -80,18 +80,19 @@ try:
 	f.close()
 	print("[INFO] write success")
 
-except FileNotFoundError:
+	
+except PermissionError: #from repetitive upload
+	print("[ERROR] user already exists, only one scan permitted")
+	os.remove(tempfile)
+	
+except FileNotFoundError: #from empty upload
 	print("[ERROR] no file uploaded")
 
-except ValueError:
+except ValueError: #from face not detected
 	print("[ERROR] no face detected")
 	if os.path.isdir(filedir):
 		shutil.rmtree(filedir)
 	print("[INFO] removing invalid entries")
-	
-except PermissionError:
-	print("[ERROR] user already exists, only one scan permitted")
-	os.remove(tempfile)
 
 except:
 	print("[ERROR] unknown error")
