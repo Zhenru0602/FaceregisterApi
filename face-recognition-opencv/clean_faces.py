@@ -28,8 +28,14 @@ else:
         print("[ERROR] user not found")
         exit(0)
     
-    print("[INFO] cleaning encoding... user", username)
-    data = pickle.loads(open("encodings.pickle", "rb").read())
+    print("[INFO] cleaning encoding of user \""+username+'\"')
+
+    try:
+        data = pickle.loads(open("encodings.pickle", "rb").read())
+    except ValueError:
+        print("[ERROR] value error: pickle protocol 3\n[INFO] maybe not using python3?")
+        exit(0)
+    
     encodings = data["encodings"]
     names = data["names"]
     assert len(encodings) == len(names)
@@ -47,4 +53,4 @@ else:
 end = timeit.default_timer()
 
 print("[INFO] cleaning done! Hooray!")
-print("[INFO] duration:", end-start)
+print("[INFO] duration: "+str(end-start))
